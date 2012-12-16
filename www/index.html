@@ -80,7 +80,8 @@
                 <input type="text" name="username" id="username" value="" placeholder="     Address"/>
                 
                 <a href="#page1" data-role="button" data-icon="star">Star button</a>
-                
+
+                    
             </div><!-- /content -->
 
 
@@ -100,6 +101,33 @@
                 <a href="#" data-role="button" id="page-btn-home"><img src="images/home.png" alt="Home"/>Home</a>
                 <a href="#" data-role="button" id="page-btn-disarm"><img src="images/disarm.png" alt="Disarm"/>Disarm</a>
                 <p><a class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-c" href="#panel_setting" data-role="button"><span class="ui-btn-inner ui-btn-corner-all" aria-hidden="true"><span class="ui-btn-text">Panel Setting</span></span></a></p>
+                
+                <script>
+                    $(document).ready(function(){
+                                      var output = $('#output');
+                                      
+                                      $.ajax({
+                                             url: 'http://stmak.4irc.com/web/samcroft/landmarks.php',
+                                             dataType: 'jsonp',
+                                             jsonp: 'jsoncallback',
+                                             timeout: 5000,
+                                             success: function(data, status){
+                                             $.each(data, function(i,item){
+                                                    var landmark = '<h1>'+item.name+'</h1>'
+                                                    + '<p>'+item.latitude+'<br>'
+                                                    + item.longitude+'</p>';
+                                                    
+                                                    output.append(landmark);
+                                                    });
+                                             },
+                                             error: function(){
+                                             output.text('There was an error loading the data.');
+                                             }
+                                             });
+                                      });
+                    </script>
+                
+                
             </div><!-- /content -->
             
             <div role="contentinfo" class="ui-footer ui-bar-a ui-disable" data-role="footer">
